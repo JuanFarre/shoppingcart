@@ -1,6 +1,9 @@
 package peludev.Ventas.service;
 
+
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import peludev.Ventas.client.CarritoClient;
 import peludev.Ventas.dto.ProductDTO;
 import peludev.Ventas.http.response.ProductByShoppingCartResponse;
@@ -10,6 +13,7 @@ import peludev.Ventas.repository.IShoppingCartRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service
 public class ShoppingCartService implements IShoppingCartService{
 
     @Autowired
@@ -18,7 +22,6 @@ public class ShoppingCartService implements IShoppingCartService{
     @Autowired
     private CarritoClient carritoClient;
 
-    @Autowired
 
 
     @Override
@@ -44,22 +47,32 @@ public class ShoppingCartService implements IShoppingCartService{
     @Override
     public void save(ShoppingCart shoppingCart) {
 
+        shoppingCartRepository.save(shoppingCart);
+
     }
+
 
     @Override
     public ProductByShoppingCartResponse findProductByIdShoppingCart(Long id) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Carrito de compras no encontrado"));
 
-        //consultar el carrito
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(id).orElse(new ShoppingCart());
-        // obtener los productos del carrito
-
+        // Obtener los productos asociados al carrito
         List<ProductDTO> productDTOList = carritoClient.findAllByIdCarrito(id);
 
-
-        return ProductByShoppingCartResponse.builder()
-                .totalPrice(shoppingCart.getTotalPrice())
+        // Crear la respuesta
+        ProductByShoppingCartResponse response = ProductByShoppingCartResponse.builder()
                 .productDTOList(productDTOList)
                 .build();
+
+        // Calcular el precio total sumando los precios de los productos
+        BigDecimal calculatedTotalPrice = response.calculateTotalPrice();
+
+        // Actualizar el total_price del carrito y guardarlo en la base de datos
+        shoppingCart.setTotalPrice(calculatedTotalPrice);
+        shoppingCartRepository.save(shoppingCart);
+
+        return response;
     }
 
 }

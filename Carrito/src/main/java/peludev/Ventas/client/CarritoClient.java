@@ -9,7 +9,7 @@ import peludev.Ventas.dto.ProductDTO;
 
 import java.util.List;
 
-@FeignClient(name = "msvc-product", url = "localhost:9001/api/products")
+@FeignClient(name = "msvc-product", url = "localhost:8080/api/products")
 public interface CarritoClient {
 
     @GetMapping("/search-by-carrito/{id}")

@@ -31,10 +31,22 @@ public class ShoppingCartController {
         }
     }
 
+    @PostMapping("/create")
+    public void saveShoppingCart(ShoppingCart shoppingCart){
+        shoppingCartService.save(shoppingCart);
+    }
+
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id) {
         shoppingCartService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search/carrito/{id}")
+    public ResponseEntity<?> findProductByIdShoppingCart(@PathVariable Long id){
+        return ResponseEntity.ok(shoppingCartService.findProductByIdShoppingCart(id));
     }
 
 }

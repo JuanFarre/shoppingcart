@@ -1,0 +1,25 @@
+# application.yml for msvc-carrito
+server:
+  port: 9002
+
+spring:
+  application:
+    name: msvc-carrito
+  datasource:
+    url: jdbc:mysql://localhost:3307/carrito_service?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

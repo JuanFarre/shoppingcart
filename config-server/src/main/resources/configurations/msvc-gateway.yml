@@ -1,0 +1,24 @@
+eureka:
+  client:
+    register-with-eureka: false
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: products
+          uri: http://localhost:9001
+          predicates:
+            - Path=/api/products/**
+
+        - id: shopping-cart
+          uri: http://localhost:9002
+          predicates:
+            - Path=/api/shopping-carts/**
