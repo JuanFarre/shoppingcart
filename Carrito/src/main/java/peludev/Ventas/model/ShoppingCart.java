@@ -27,7 +27,8 @@ public class ShoppingCart {
     private Long id;
     private BigDecimal totalPrice = BigDecimal.ZERO;
 
-
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "carrito_id")
+    private List<ItemCarrito> items;
 
 }

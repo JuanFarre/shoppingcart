@@ -19,5 +19,5 @@ public interface IProductService {
 
     public void editProduct(Long id, Product product);
 
-    public List<Product> findAllByCarritoId(Long id);
+
 }

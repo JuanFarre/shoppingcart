@@ -1,5 +1,6 @@
-package com.pelusa.Products.models;
+package peludev.Ventas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,16 +10,21 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Getter
+@Entity
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Product {
+public class ItemCarrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String brand;
-    private BigDecimal price;
+    private Long productoId;
+    private int cantidad;
+    private BigDecimal precio;
+
+    @ManyToOne
+    @JoinColumn(name = "carrito_id")
+    @JsonIgnore
+    private ShoppingCart carrito;
 }

@@ -1,8 +1,10 @@
 package peludev.Ventas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import peludev.Ventas.model.ItemCarrito;
 import peludev.Ventas.model.ShoppingCart;
 import peludev.Ventas.service.IShoppingCartService;
 
@@ -44,9 +46,32 @@ public class ShoppingCartController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search/carrito/{id}")
-    public ResponseEntity<?> findProductByIdShoppingCart(@PathVariable Long id){
-        return ResponseEntity.ok(shoppingCartService.findProductByIdShoppingCart(id));
+
+    @DeleteMapping("/{carritoId}/productos/{itemId}")
+    public ResponseEntity<?> quitarProducto(@PathVariable Long carritoId, @PathVariable Long itemId) {
+        ShoppingCart carrito = shoppingCartService.quitarProducto(carritoId, itemId);
+        return ResponseEntity.ok(carrito);
     }
+
+
+    // Endpoint para agregar un producto al carrito
+    @PostMapping("/{carritoId}/productos")
+    public ResponseEntity<ShoppingCart> agregarProducto(
+            @PathVariable Long carritoId,
+            @RequestBody ItemCarrito itemCarrito) {
+        try {
+            ShoppingCart carritoActualizado = shoppingCartService.agregarProducto(carritoId, itemCarrito);
+            if (carritoActualizado != null) {
+                return new ResponseEntity<>(carritoActualizado, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            // Manejo de errores
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 }

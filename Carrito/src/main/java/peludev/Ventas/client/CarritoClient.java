@@ -12,6 +12,7 @@ import java.util.List;
 @FeignClient(name = "msvc-product", url = "localhost:8080/api/products")
 public interface CarritoClient {
 
-    @GetMapping("/search-by-carrito/{id}")
-    public List<ProductDTO> findAllByIdCarrito(@PathVariable Long id);
+
+    @GetMapping("/{id}")
+    ProductDTO getProductById(@PathVariable Long id);
 }

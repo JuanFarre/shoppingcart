@@ -46,10 +46,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/search-by-carrito/{id}")
-    public ResponseEntity<?> findByIdCarrito(@PathVariable Long id){
-        return ResponseEntity.ok(productService.findAllByCarritoId(id));
-    }
+
 
 
 

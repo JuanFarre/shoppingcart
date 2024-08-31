@@ -57,9 +57,6 @@ public class ProductService implements IProductService{
 
     }
 
-    @Override
-    public List<Product> findAllByCarritoId(Long id) {
-        return productRepository.findAllByCarritoId(id);
-    }
+
 
 }

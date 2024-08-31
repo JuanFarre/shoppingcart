@@ -1,12 +1,17 @@
 package peludev.Ventas.service;
 
 import peludev.Ventas.http.response.ProductByShoppingCartResponse;
+import peludev.Ventas.model.ItemCarrito;
 import peludev.Ventas.model.ShoppingCart;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface IShoppingCartService {
+
+    public ShoppingCart agregarProducto(Long carritoId, ItemCarrito item);
+
+    public ShoppingCart quitarProducto(Long carritoId, Long itemId);
 
     public List<ShoppingCart> getAllShoppingCart();
 
@@ -16,7 +21,7 @@ public interface IShoppingCartService {
 
     public void save(ShoppingCart shoppingCart);
 
-    public ProductByShoppingCartResponse findProductByIdShoppingCart(Long id);
+
 
 
 }
