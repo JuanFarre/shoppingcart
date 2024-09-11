@@ -10,6 +10,7 @@
         <module name="microservice-gateway" />
         <module name="config-server" />
         <module name="Products" />
+        <module name="buyCart" />
         <module name="Carrito" />
         <module name="eureka" />
       </profile>
@@ -23,6 +24,7 @@
       <module name="Carrito" options="-parameters" />
       <module name="Products" options="-parameters" />
       <module name="Ventas" options="-parameters" />
+      <module name="buyCart" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="microservice-gateway" options="-parameters" />

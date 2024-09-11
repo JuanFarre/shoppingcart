@@ -17,6 +17,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>buyCart</module>
     <module>Carrito</module>
     <module>Products</module>
     <module>microservice-gateway</module>

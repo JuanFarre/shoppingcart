@@ -22,3 +22,8 @@ spring:
           uri: http://localhost:9002
           predicates:
             - Path=/api/shopping-carts/**
+
+        - id: buycart
+          uri: http://localhost:9003
+          predicates:
+            - Path=/api/buycart/**

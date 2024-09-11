@@ -1,0 +1,8 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: msvc-buycart
+  config:
+    import: "optional:configserver:http://localhost:8888"

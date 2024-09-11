@@ -1,4 +1,4 @@
-package peludev.Ventas.client;
+package peludev.Ventas.http.client;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

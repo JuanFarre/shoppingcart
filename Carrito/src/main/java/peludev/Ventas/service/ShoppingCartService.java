@@ -1,14 +1,11 @@
 package peludev.Ventas.service;
 
 
-import java.util.NoSuchElementException;
-
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import peludev.Ventas.client.CarritoClient;
+import peludev.Ventas.http.client.CarritoClient;
 import peludev.Ventas.dto.ProductDTO;
-import peludev.Ventas.http.response.ProductByShoppingCartResponse;
 import peludev.Ventas.model.ItemCarrito;
 import peludev.Ventas.model.ShoppingCart;
 import peludev.Ventas.repository.IShoppingCartRepository;
